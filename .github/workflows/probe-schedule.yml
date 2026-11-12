@@ -1,0 +1,11 @@
+name: probe-schedule
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+permissions: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - run: echo "scheduled run ${{ github.run_id }}"
