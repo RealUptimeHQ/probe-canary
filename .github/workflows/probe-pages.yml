@@ -1,0 +1,22 @@
+name: probe-pages
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+permissions:
+  pages: write
+  id-token: write
+concurrency: pages
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    environment: github-pages
+    steps:
+      - run: |
+          mkdir site
+          printf '<!doctype html><html><head><meta name="canary-built-at" content="%s"><meta name="robots" content="noindex"></head><body>realuptime-probe-canary</body></html>\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
