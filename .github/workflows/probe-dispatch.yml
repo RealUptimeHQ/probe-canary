@@ -1,0 +1,9 @@
+name: probe-dispatch
+on: workflow_dispatch
+permissions: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - run: echo "probe run ${{ github.run_id }}"
