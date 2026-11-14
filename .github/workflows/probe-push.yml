@@ -1,0 +1,12 @@
+name: probe-push
+on:
+  push:
+    branches: [main]
+    paths: [heartbeat.txt]
+permissions: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - run: echo "probe push run ${{ github.run_id }}"
